@@ -1,6 +1,6 @@
 Generator for a C file that parses a zone file and generates C code to load each zone into a Trie structure. 
 
-	./
+	.
 	|-- dns_1.h
 	|-- generate_zone.c
 	|-- Makefile
@@ -13,7 +13,9 @@ Generator for a C file that parses a zone file and generates C code to load each
 	|-- sharedFunctions.c
 	|-- sharedFunctions.h
 	|-- structs.h
-	|-- trie.c
+	|-- tr
+	|   |-- triez.c
+	|   `-- triez.h
 	|-- trie_loader.c
 	|-- triez.c
 	|-- triez.h
