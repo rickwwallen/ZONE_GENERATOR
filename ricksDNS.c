@@ -3,7 +3,7 @@
  * * DNS SERVER THE UTILIZES TRIE STRUCTURE AS THE LOOKUP DATABASE
  * * CREATED BY:	RICK W. WALLEN
  * * DATE CREATED:	JULY.4.2013
- * * DATE LAST MOD:	AUGUST.21.2013
+ * * DATE LAST MOD:	MARCH.25.2015
  * *     ___________
  * *    |           | 
  * *  [[|___________|]] 
@@ -23,6 +23,8 @@
  * *		-use parseMsge.c for functions to handle queries
  * *	August.21.2013-many changes have not been logged but works as of now
  * *			-redid include statements
+ * *	March.24.2015-altered code to call function to load Trie struct in memory
+ * *	March.25.2015-commented C code
  * */
 /**********************************************************************/
 #include "structs.h"
@@ -63,7 +65,6 @@ int main(int argc, char* argv[])
 	dmn = (char **) malloc(qdc*sizeof(char *));
 	
 	udpSock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	//udpSock = socket(AF_INET, SOCK_DGRAM, 0);
 
 	bzero(&serSockAddr, sizeof(serSockAddr));
 	bzero(&cliSockAddr, sizeof(cliSockAddr));

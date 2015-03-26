@@ -1,9 +1,9 @@
 /*
- * * FILE NAME:		ricksDNS.c
- * * DNS SERVER THE UTILIZES TRIE STRUCTURE AS THE LOOKUP DATABASE
+ * * FILE NAME:		generate_zone.c
+ * * CODE THAT CALLS FUNCTION TO PARSE ZONE FILE INTO C CODE TO LOAD TRIE INTO MEMORY
  * * CREATED BY:	RICK W. WALLEN
- * * DATE CREATED:	JULY.4.2013
- * * DATE LAST MOD:	AUGUST.21.2013
+ * * DATE CREATED:	MARCH.24.2015
+ * * DATE LAST MOD:	MARCH.25.2015
  * *     ___________
  * *    |           | 
  * *  [[|___________|]] 
@@ -19,10 +19,9 @@
 /*
  * * MODIFIED LOG:
  * *       <date>-<description>
- * *	July.4.2013-created 
- * *		-use parseMsge.c for functions to handle queries
- * *	August.21.2013-many changes have not been logged but works as of now
- * *			-redid include statements
+ * *	March.24.2015-created altered to call readZone to generate C function
+ * 			- to load Trie structure into memory
+ * *	March.25.2015-altered comments
  * */
 /**********************************************************************/
 #include "structs.h"

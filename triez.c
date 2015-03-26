@@ -4,7 +4,7 @@
  * *	MULTITHREADING
  * * CREATED BY:	RICK W. WALLEN
  * * DATE CREATED:	APRIL.22.2013
- * * DATE LAST MOD:	DECEMBER.15.2014
+ * * DATE LAST MOD:	MARCH.25.2015
  * *     ___________
  * *    |           | 
  * *  [[|___________|]] 
@@ -37,6 +37,9 @@
  * *		-added a function to put the resource record in message buffer to send 
  * *	August.21.2013-added function from what was parseMsgeDNS.c that checks support of query type and query class
  * *	December.15.2014-init ttl to solve warnings since it is a low number if no overwrite occurs it assigns the ttlMin
+ * *	March.24.2015-altered zone read zone file to generate C code to load Trie structure into memory
+ * *		-
+ * *	March.25.2015-altered comments
  * */
 /**********************************************************************/
 #include "triez.h"
@@ -340,7 +343,6 @@ Trie *createNode(char k, RR *v)
 		node->val = v;
 	else
 	{
-
 		node->val = NULL;
 	}
 	
@@ -2029,132 +2031,6 @@ Trie *readZone(char *fn)
 	//return root;
 	return NULL;
 }
-/* F(X) TO TAKE IN STRING OF ZONE FILE NAME AND CREATE DB */
-//Trie *readZone(char *fn)
-//{
-//	FILE *fp;
-//	char buff;
-//	char domNme[DNM_SZ];
-//	char domNme2[DNM_SZ];
-//	char rR[LNE_SZ];
-//	char rR2[LNE_SZ];
-//	int i;
-//	uint32_t dTtl = 0; //default ttl gets redefined by SOA
-//	uint16_t dClass = 0; //default class gets redefined by SOA
-//	RR *rrs;
-//	Trie *root;
-//
-//	root = createNode('*',  NULL);
-//	
-//	if((fp = fopen(fn, "r")) == NULL)
-//		return NULL;
-//
-//	while(!feof(fp))
-//	{
-//		buff = fgetc(fp);
-//		if(buff == EOF)
-//			break;
-//
-//		// If line is a comment then ignore it
-//		else if(buff == ';')
-//		{
-//			while(buff != '\n' && buff != EOF)
-//				buff = fgetc(fp);
-//		}	
-//
-//		// Read in Domain Name
-//		if(buff != '\t' && buff != ' ' && buff != '\n')
-//		{
-//			i = 0;
-//			strcpy(domNme,"");
-//			while(buff != ';' && buff != '(' && buff != '\t' && buff != ' ' && buff != EOF)
-//			{
-//				domNme[i] = buff;
-//				i++;
-//				buff = fgetc(fp);
-//			}
-//			domNme[i] = '\0';
-//			strcpy(domNme2, domNme);
-//			revDN(domNme);
-//		}
-//
-//		// Read in Resource Record
-//		strcpy(rR2,"");
-//		while(buff != '\n' && buff != EOF)
-//		{
-//			if(buff == ';' || buff == '(');
-//			else
-//				buff = fgetc(fp);
-//			// Reached the beginning of a comment therefore ignore ignore the rest of the line
-//			if(buff == ';')
-//			{
-//				while(buff != '\n' && buff != EOF)
-//					buff = fgetc(fp);
-//			}
-//			// Reached the beginning of a multilined statement, this usually is with the SOA
-//			else if(buff == '(')
-//			{
-//				while(buff != ')')
-//				{
-//					// Reached the beginning of a comment so we can ignore the rest of the line
-//					if(buff == ';')
-//					{
-//						while(buff != '\n' && buff != EOF)
-//							buff = fgetc(fp);
-//					}
-//					buff = fgetc(fp);
-//					i = 0;
-//					strcpy(rR, "");
-//					while(buff != ';' && buff != ')' && buff != '\t' && buff != ' ' && buff != '\n' && buff != EOF)
-//					{
-//						rR[i] = buff;
-//						i++;
-//						buff = fgetc(fp);
-//					}
-//					rR[i] = '\0';
-//					if(strcmp(rR, "") != 0)
-//					{
-//						strcat(rR2, rR);
-//						strcat(rR2, ",");
-//					}
-//				}
-//			}
-//			else
-//			{
-//				i = 0;
-//				strcpy(rR, "");
-//				while(buff != ';' && buff != '(' && buff != '\t' && buff != ' ' && buff != '\n' && buff != EOF)
-//				{
-//					rR[i] = buff;
-//					i++;
-//					buff = fgetc(fp);
-//				}
-//				rR[i] = '\0';
-//				if(strcmp(rR, "" ) != 0)
-//				{
-//					strcat(rR2, rR);
-//					strcat(rR2, ",");
-//				}
-//			}
-//		}
-//		//This is where we call to make trie but before do we need to put the chars into RR's?
-//		if(strcmp(rR2, "") != 0)
-//		{
-//			rrs = createResRec(rR2, &dTtl, &dClass);
-//			if(rrs != NULL)
-//			{
-//				if(rrs->ptrrs != NULL)
-//					addTrie(root, domNme, rrs);
-//				else if(checkDN(domNme2) == 0)
-//					addTrie(root, domNme, rrs);					
-//			}
-//		}
-//
-//	}
-//
-//	fclose(fp);
-//	return root;
-//}
 
 /* F(X) TO REVERSE DOMAIN NAME */
 int revDN(char *DN)
